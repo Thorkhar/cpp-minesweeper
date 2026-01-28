@@ -65,19 +65,19 @@ public:
         generateTiles();
     };
 
-    int checkIfMine(int x, int y) {
-        return (m_minefield[x][y].getTileInfo());
+    void printFieldToConsole() {
+        for (int y = 0; y < m_height; y++) {
+            for (int x = 0; x < m_width; x++) {
+                cout << m_minefield[x][y].getTileInfo();
+            }
+            cout << endl;
+        }
     }
 };
 
 
 int main() {
     Field mineField(10, 10);
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 10; j++) {
-            cout << mineField.checkIfMine(i, j);
-        }
-        cout << endl;
-    }
+    mineField.printFieldToConsole();
     return 0;
 }
