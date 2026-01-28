@@ -1,12 +1,12 @@
+#include <iostream>
+#include <ostream>
+
 class Tile {
-    private:
-        int x;
-        int y;
-        bool isMine;
-    public:
-        int minesNear;
+public:
+    int m_x;
+    int y;
 
-    Tile(int x, int y, bool isMine) {
-
+    void printCoords() {
+        cout << m_x << " " << y << endl;
     }
 };
