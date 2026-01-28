@@ -46,10 +46,6 @@ class Field {
 
     vector<vector<Tile> > m_minefield;
 
-public:
-    Field(int width, int height) : m_width(width), m_height(height) {
-    };
-
     void generateTiles() {
         for (int x = 0; x < m_width; x++) {
             vector<Tile> tileRow;
@@ -59,11 +55,15 @@ public:
             m_minefield.push_back(tileRow);
         }
     }
+
+public:
+    Field(int width, int height) : m_width(width), m_height(height) {
+        generateTiles();
+    };
 };
 
 
 int main() {
     Field mineField(10, 10);
-    mineField.generateTiles();
     return 0;
 }
