@@ -38,6 +38,10 @@ public:
     }
 
     int getMinesNear() { return m_minesNear; };
+
+    bool getTileInfo() {
+        return (m_isMine);
+    }
 };
 
 class Field {
@@ -50,7 +54,7 @@ class Field {
         for (int x = 0; x < m_width; x++) {
             vector<Tile> tileRow;
             for (int y = 0; y < m_height; y++) {
-                tileRow.push_back(Tile(x, y, randomBool(0.9)));
+                tileRow.push_back(Tile(x, y, randomBool(0.1)));
             }
             m_minefield.push_back(tileRow);
         }
@@ -60,10 +64,20 @@ public:
     Field(int width, int height) : m_width(width), m_height(height) {
         generateTiles();
     };
+
+    int checkIfMine(int x, int y) {
+        return (m_minefield[x][y].getTileInfo());
+    }
 };
 
 
 int main() {
     Field mineField(10, 10);
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            cout << mineField.checkIfMine(i, j);
+        }
+        cout << endl;
+    }
     return 0;
 }
