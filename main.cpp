@@ -47,28 +47,29 @@ public:
 class Field {
     int m_width;
     int m_height;
+    float m_density;
 
     vector<vector<Tile> > m_minefield;
 
     void generateTiles() {
-        for (int x = 0; x < m_width; x++) {
+        for (int y = 0; y < m_height; y++) {
             vector<Tile> tileRow;
-            for (int y = 0; y < m_height; y++) {
-                tileRow.push_back(Tile(x, y, randomBool(0.1)));
+            for (int x = 0; x < m_height; x++) {
+                tileRow.push_back(Tile(x, y, randomBool(m_density)));
             }
             m_minefield.push_back(tileRow);
         }
     }
 
 public:
-    Field(int width, int height) : m_width(width), m_height(height) {
+    Field(int width, int height, float density) : m_width(width), m_height(height), m_density(density) {
         generateTiles();
     };
 
     void printFieldToConsole() {
         for (int y = 0; y < m_height; y++) {
             for (int x = 0; x < m_width; x++) {
-                cout << m_minefield[x][y].getTileInfo();
+                cout << m_minefield[y][x].getTileInfo();
             }
             cout << endl;
         }
@@ -77,7 +78,16 @@ public:
 
 
 int main() {
-    Field mineField(10, 10);
+    int width, height;
+    float tileDensity;
+    cout << "Enter field width" << endl;
+    cin >> width;
+    cout << "Enter field height" << endl;
+    cin >> height;
+    cout << "Enter field density" << endl;
+    cin >> tileDensity;
+
+    Field mineField(width, height, tileDensity);
     mineField.printFieldToConsole();
     return 0;
 }
