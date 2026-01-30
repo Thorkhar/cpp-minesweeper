@@ -21,13 +21,17 @@ public:
     Tile(int x, int y, bool isMine) : m_x(x), m_y(y), m_isMine(isMine) {
     };
 
-    void Probe() {
+    bool isMine() {
+        return (m_isMine);
+    }
+
+    void probe() {
         if (!m_isProbed) {
             m_isProbed = true;
         }
     }
 
-    void Flag() {
+    void flag() {
         if (!m_isProbed) {
             m_isFlagged = !m_isFlagged;
         }
@@ -48,6 +52,7 @@ class Field {
     int m_width;
     int m_height;
     float m_density;
+    int m_mineCount;
 
     vector<vector<Tile> > m_minefield;
 
@@ -55,7 +60,11 @@ class Field {
         for (int y = 0; y < m_height; y++) {
             vector<Tile> tileRow;
             for (int x = 0; x < m_height; x++) {
-                tileRow.push_back(Tile(x, y, randomBool(m_density)));
+                Tile tile = Tile(x, y, randomBool(m_density));
+                tileRow.push_back(tile);
+                if (tile.isMine()) {
+                    m_mineCount++;
+                }
             }
             m_minefield.push_back(tileRow);
         }
