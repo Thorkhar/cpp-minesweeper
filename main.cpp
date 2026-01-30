@@ -1,5 +1,6 @@
 #include <iostream>
 #include <random>
+#include "Tile.h"
 using namespace std;
 
 bool randomBool(float p) {
@@ -8,45 +9,6 @@ bool randomBool(float p) {
     std::bernoulli_distribution dist(p);
     return dist(gen);
 }
-
-class Tile {
-    int m_x;
-    int m_y;
-    bool m_isMine;
-    bool m_isFlagged = false;
-    bool m_isProbed = false;
-    int m_minesNear;
-
-public:
-    Tile(int x, int y, bool isMine) : m_x(x), m_y(y), m_isMine(isMine) {
-    };
-
-    bool isMine() {
-        return (m_isMine);
-    }
-
-    void probe() {
-        if (!m_isProbed) {
-            m_isProbed = true;
-        }
-    }
-
-    void flag() {
-        if (!m_isProbed) {
-            m_isFlagged = !m_isFlagged;
-        }
-    }
-
-    void setMinesNear(int mineCount) {
-        m_minesNear = mineCount;
-    }
-
-    int getMinesNear() { return m_minesNear; };
-
-    bool getTileInfo() {
-        return (m_isMine);
-    }
-};
 
 class Field {
     int m_width;
@@ -62,7 +24,7 @@ class Field {
             for (int x = 0; x < m_height; x++) {
                 Tile tile = Tile(x, y, randomBool(m_density));
                 tileRow.push_back(tile);
-                if (tile.isMine()) {
+                if (tile.getIsMine()) {
                     m_mineCount++;
                 }
             }
@@ -78,7 +40,7 @@ public:
     void printFieldToConsole() {
         for (int y = 0; y < m_height; y++) {
             for (int x = 0; x < m_width; x++) {
-                cout << m_minefield[y][x].getTileInfo();
+                cout << m_minefield[y][x].getIsMine();
             }
             cout << endl;
         }
