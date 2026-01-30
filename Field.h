@@ -1,9 +1,7 @@
 #ifndef CPP_MINESWEEPER_FIELD_H
 #define CPP_MINESWEEPER_FIELD_H
 #include <vector>
-#include <iostream>
 #include "Tile.h"
-#include "RandomGenerator.h"
 
 class Field {
     int m_width, m_height, m_mineCount;
