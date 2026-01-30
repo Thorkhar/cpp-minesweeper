@@ -2,17 +2,16 @@
 #include <random>
 #include <vector>
 #include "Field.h"
-using namespace std;
 
 int main() {
     int width, height;
     float tileDensity;
-    cout << "Enter field width" << endl;
-    cin >> width;
-    cout << "Enter field height" << endl;
-    cin >> height;
-    cout << "Enter field density" << endl;
-    cin >> tileDensity;
+    std::cout << "Enter field width" << std::endl;
+    std::cin >> width;
+    std::cout << "Enter field height" << std::endl;
+    std::cin >> height;
+    std::cout << "Enter field density" << std::endl;
+    std::cin >> tileDensity;
 
     Field mineField(width, height, tileDensity);
     mineField.printFieldToConsole();

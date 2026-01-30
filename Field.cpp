@@ -1,4 +1,8 @@
 #include "Field.h"
+#include "RandomGenerator.h"
+#include "Tile.h"
+#include <vector>
+#include <iostream>
 
 Field::Field(int width, int height, float density) {
     m_width = width;
