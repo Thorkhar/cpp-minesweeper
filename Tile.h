@@ -9,7 +9,7 @@ class Tile {
 public:
     Tile(int x, int y, bool isMine);
 
-    bool getIsMine();
+    int getIsMine();
 
     bool getIsFlagged();
 

@@ -9,8 +9,11 @@ Tile::Tile(int x, int y, bool isMine) {
     m_minesNear = 0;
 }
 
-bool Tile::getIsMine() {
-    return m_isMine;
+int Tile::getIsMine() {
+    if (m_isMine) {
+        return 1;
+    }
+    return 0;
 }
 
 bool Tile::getIsFlagged() {

@@ -13,14 +13,14 @@ void Field::m_generateTiles() {
     for (int y = 0; y < m_height; y++) {
         std::vector<Tile> tileRow;
         for (int x = 0; x < m_height; x++) {
-            Tile tile = Tile(x, y, RandomGenerator::randomBool(m_density));
-            tileRow.push_back(tile);
-            if (tile.getIsMine()) {
-                m_mineCount++;
-            }
+            tileRow.push_back(Tile(x, y, RandomGenerator::randomBool(m_density)));
         }
         m_minefield.push_back(tileRow);
     }
+}
+
+int Field::getMineCount() {
+    return m_mineCount;
 }
 
 void Field::printFieldToConsole() {

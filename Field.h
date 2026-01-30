@@ -13,6 +13,8 @@ class Field {
 public:
     Field(int width, int height, float density);
 
+    int getMineCount();
+
     void printFieldToConsole();
 };
 
