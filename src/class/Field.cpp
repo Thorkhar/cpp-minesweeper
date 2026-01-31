@@ -1,5 +1,5 @@
-#include "Field.h"
-#include "RandomGenerator.h"
+#include "./Field.h"
+#include "./RandomGenerator.h"
 #include <iostream>
 
 Field::Field(int width, int height, float density) {

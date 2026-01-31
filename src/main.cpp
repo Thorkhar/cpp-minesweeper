@@ -1,7 +1,7 @@
 #include <iostream>
 #include <random>
 #include <vector>
-#include "Field.h"
+#include "class/Field.h"
 
 int main() {
     int width, height;

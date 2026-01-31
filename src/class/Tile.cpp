@@ -1,4 +1,4 @@
-#include "Tile.h"
+#include "./Tile.h"
 
 Tile::Tile(int x, int y, bool isMine) {
     m_x = x;

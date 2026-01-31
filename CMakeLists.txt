@@ -3,10 +3,10 @@ project(cpp_minesweeper)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(cpp_minesweeper main.cpp
-        Tile.cpp
-        Tile.h
-        Field.cpp
-        Field.h
-        RandomGenerator.cpp
-        RandomGenerator.h)
+add_executable(cpp_minesweeper src/main.cpp
+        src/class/Tile.cpp
+        src/class/Tile.h
+        src/class/Field.cpp
+        src/class/Field.h
+        src/class/RandomGenerator.cpp
+        src/class/RandomGenerator.h)
