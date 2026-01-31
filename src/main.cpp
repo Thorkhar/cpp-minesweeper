@@ -1,6 +1,5 @@
 #include <iostream>
 #include <random>
-#include <vector>
 #include "class/Field.h"
 
 int main() {
