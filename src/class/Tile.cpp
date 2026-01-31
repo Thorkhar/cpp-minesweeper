@@ -10,10 +10,7 @@ Tile::Tile(int x, int y, bool isMine) {
 }
 
 int Tile::getIsMine() {
-    if (m_isMine) {
-        return 1;
-    }
-    return 0;
+    return m_isMine;
 }
 
 bool Tile::getIsFlagged() {

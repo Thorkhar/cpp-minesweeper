@@ -13,6 +13,14 @@ int main() {
     std::cin >> tileDensity;
 
     Field mineField(width, height, tileDensity);
-    mineField.printFieldToConsole();
+
+    while (mineField.getIsAlive()) {
+        mineField.printFieldToConsole();
+        int x, y;
+        std::cout << "Enter x, y" << std::endl;
+        std::cin >> x >> y;
+        mineField.probeTile(x, y);
+    }
+
     return 0;
 }
