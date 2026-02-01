@@ -12,12 +12,15 @@ Field::Field(int width, int height, float density) {
 
 void Field::m_generateTiles() {
     for (int y = 0; y < m_height; y++) {
-        std::vector<Tile> tileRow;
         for (int x = 0; x < m_height; x++) {
-            tileRow.push_back(Tile(x, y, RandomGenerator::randomBool(m_density)));
+            m_minefield.push_back(Tile(x, y, RandomGenerator::randomBool(m_density)));
         }
-        m_minefield.push_back(tileRow);
     }
+}
+
+int Field::m_calcTileIndex(int x, int y) {
+    int tileIndex = y * m_width + x;
+    return tileIndex;
 }
 
 int Field::getMineCount() {
@@ -31,25 +34,24 @@ bool Field::getIsAlive() {
 void Field::printFieldToConsole() {
     for (int y = 0; y < m_height; y++) {
         for (int x = 0; x < m_width; x++) {
-            if (m_minefield[y][x].getIsProbed()) {
-                std::cout << "|X";
-            } else {
-                std::cout << "| ";
-            }
+            int tileIndex = m_calcTileIndex(x, y);
+            std::cout << "|" << m_minefield[tileIndex].getX() << "," << m_minefield[tileIndex].getY();
         }
-        std::cout << std::endl;
+        std::cout << "|" << std::endl;
     }
 }
 
 void Field::probeTile(int x, int y) {
-    m_minefield[y][x].probe();
-    if (m_minefield[y][x].getIsMine()) {
+    int tileIndex = m_calcTileIndex(x, y);
+    m_minefield[tileIndex].probe();
+    if (m_minefield[tileIndex].getIsMine()) {
         terminateField();
     }
 }
 
 void Field::flagTile(int x, int y) {
-    m_minefield[y][x].flag();
+    int tileIndex = m_calcTileIndex(x, y);
+    m_minefield[tileIndex].flag();
 }
 
 void Field::terminateField() {

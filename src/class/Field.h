@@ -7,9 +7,11 @@ class Field {
     int m_width, m_height, m_mineCount;
     float m_density;
     bool m_isAlive;
-    std::vector<std::vector<Tile> > m_minefield;
+    std::vector<Tile> m_minefield;
 
     void m_generateTiles();
+
+    int m_calcTileIndex(int x, int y);
 
 public:
     Field(int width, int height, float density);
