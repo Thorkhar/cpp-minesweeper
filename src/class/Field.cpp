@@ -35,7 +35,7 @@ void Field::printFieldToConsole() {
     for (int y = 0; y < m_height; y++) {
         for (int x = 0; x < m_width; x++) {
             int tileIndex = m_calcTileIndex(x, y);
-            std::cout << "|" << m_minefield[tileIndex].getX() << "," << m_minefield[tileIndex].getY();
+            std::cout << "|" << m_minefield[tileIndex].getIsMine();
         }
         std::cout << "|" << std::endl;
     }
