@@ -9,7 +9,9 @@ add_executable(cpp_minesweeper src/main.cpp
         src/class/Field.cpp
         src/class/Field.h
         src/class/RandomGenerator.cpp
-        src/class/RandomGenerator.h)
+        src/class/RandomGenerator.h
+        src/class/Sprites.cpp
+        src/class/Sprites.h)
 target_link_libraries(cpp_minesweeper
         sfml-graphics
         sfml-window
