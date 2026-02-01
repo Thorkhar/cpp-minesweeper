@@ -9,6 +9,10 @@ class Tile {
 public:
     Tile(int x, int y, bool isMine);
 
+    int getX();
+
+    int getY();
+
     int getIsMine();
 
     bool getIsFlagged();

@@ -9,6 +9,14 @@ Tile::Tile(int x, int y, bool isMine) {
     m_minesNear = 0;
 }
 
+int Tile::getX() {
+    return m_x;
+}
+
+int Tile::getY() {
+    return m_y;
+}
+
 int Tile::getIsMine() {
     return m_isMine;
 }
