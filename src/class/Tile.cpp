@@ -1,6 +1,11 @@
 #include "./Tile.h"
+#include <stdexcept>
 
 Tile::Tile(int x, int y, bool isMine) {
+    if (x < 0 || y < 0) {
+        throw std::invalid_argument("Invalid tile coordinates");
+    }
+
     m_x = x;
     m_y = y;
     m_isMine = isMine;
