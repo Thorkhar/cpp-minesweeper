@@ -1,18 +1,12 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
 #include "class/Field.h"
 
 int main() {
-    int width, height;
-    float tileDensity;
-    std::cout << "Enter field width" << std::endl;
-    std::cin >> width;
-    std::cout << "Enter field height" << std::endl;
-    std::cin >> height;
-    std::cout << "Enter field density" << std::endl;
-    std::cin >> tileDensity;
-
-    Field mineField(width, height, tileDensity);
-    mineField.printFieldToConsole();
-
+    sf::RenderWindow window(sf::VideoMode({800, 600}), "My window");
+    while (window.isOpen()) {
+        window.clear(sf::Color::Black);
+        window.display();
+    }
     return 0;
 }
