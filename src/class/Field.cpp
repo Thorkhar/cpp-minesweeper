@@ -67,3 +67,7 @@ void Field::terminateField() {
     std::cout << "Boom" << std::endl;
     m_isAlive = false;
 }
+
+std::vector<Tile> Field::getMinefield() {
+    return m_minefield;
+}

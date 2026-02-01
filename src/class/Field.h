@@ -27,6 +27,8 @@ public:
     void flagTile(int x, int y);
 
     void terminateField();
+
+    std::vector<Tile> getMinefield();
 };
 
 #endif //CPP_MINESWEEPER_FIELD_H
