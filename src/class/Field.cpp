@@ -1,8 +1,17 @@
 #include "./Field.h"
 #include "./RandomGenerator.h"
 #include <iostream>
+#include <stdexcept>
 
 Field::Field(int width, int height, float density) {
+    if (density <= 0 || density >= 1) {
+        throw std::invalid_argument("Invalid density, should be a value between 0 and 1");
+    }
+
+    if (width <= 0 || height <= 0) {
+        throw std::invalid_argument("Invalid field dimensions");
+    }
+
     m_width = width;
     m_height = height;
     m_density = density;
