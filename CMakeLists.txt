@@ -3,4 +3,18 @@ project(cpp_minesweeper)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(cpp_minesweeper main.cpp)
+add_executable(cpp_minesweeper src/main.cpp
+        src/class/Tile.cpp
+        src/class/Tile.h
+        src/class/Field.cpp
+        src/class/Field.h
+        src/static/RandomGenerator.cpp
+        src/static/RandomGenerator.h
+        src/struct/Textures.cpp
+        src/struct/Textures.h
+)
+target_link_libraries(cpp_minesweeper
+        sfml-graphics
+        sfml-window
+        sfml-system
+)
