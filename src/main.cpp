@@ -3,36 +3,42 @@
 #include <SFML/Graphics.hpp>
 #include "class/Field.h"
 
+struct Textures {
+    sf::Texture tileMine;
+    sf::Texture tileUnknown;
+    sf::Texture tileFlag;
+    sf::Texture tileEmpty;
+    sf::Texture tileExploded;
+    sf::Texture tileOne;
+    sf::Texture tileTwo;
+    sf::Texture tileThree;
+    sf::Texture tileFour;
+    sf::Texture tileFive;
+    sf::Texture tileSix;
+    sf::Texture tileSeven;
+    sf::Texture tileEight;
+
+    void load() {
+        tileMine.loadFromFile("../assets/TileMine.png");
+        tileUnknown.loadFromFile("../assets/TileUnknown.png");
+        tileFlag.loadFromFile("../assets/TileFlag.png");
+        tileEmpty.loadFromFile("../assets/TileEmpty.png");
+        tileExploded.loadFromFile("../assets/TileExploded.png");
+        tileOne.loadFromFile("../assets/Tile1.png");
+        tileTwo.loadFromFile("../assets/Tile2.png");
+        tileThree.loadFromFile("../assets/Tile3.png");
+        tileFour.loadFromFile("../assets/Tile4.png");
+        tileFive.loadFromFile("../assets/Tile5.png");
+        tileSix.loadFromFile("../assets/Tile6.png");
+        tileSeven.loadFromFile("../assets/Tile7.png");
+        tileEight.loadFromFile("../assets/Tile8.png");
+    }
+};
 
 int main() {
     sf::RenderWindow window(sf::VideoMode({800, 600}), "Minesweeper");
-    sf::Texture textureTileMine;
-    sf::Texture textureTileUnknown;
-    sf::Texture textureTileFlag;
-    sf::Texture textureTileEmpty;
-    sf::Texture textureTileExploded;
-    sf::Texture textureTileOne;
-    sf::Texture textureTileTwo;
-    sf::Texture textureTileThree;
-    sf::Texture textureTileFour;
-    sf::Texture textureTileFive;
-    sf::Texture textureTileSix;
-    sf::Texture textureTileSeven;
-    sf::Texture textureTileEight;
-
-    textureTileMine.loadFromFile("../assets/TileMine.png");
-    textureTileUnknown.loadFromFile("../assets/TileUnknown.png");
-    textureTileFlag.loadFromFile("../assets/TileFlag.png");
-    textureTileEmpty.loadFromFile("../assets/TileEmpty.png");
-    textureTileExploded.loadFromFile("../assets/TileExploded.png");
-    textureTileOne.loadFromFile("../assets/Tile1.png");
-    textureTileTwo.loadFromFile("../assets/Tile2.png");
-    textureTileThree.loadFromFile("../assets/Tile3.png");
-    textureTileFour.loadFromFile("../assets/Tile4.png");
-    textureTileFive.loadFromFile("../assets/Tile5.png");
-    textureTileSix.loadFromFile("../assets/Tile6.png");
-    textureTileSeven.loadFromFile("../assets/Tile7.png");
-    textureTileEight.loadFromFile("../assets/Tile8.png");
+    Textures textures;
+    textures.load();
     Field minefield(10, 10, 0.2);
 
     while (window.isOpen()) {
@@ -48,9 +54,9 @@ int main() {
             rect.setPosition({tile.getX() * 16.f, tile.getY() * 16.f});
 
             if (tile.getIsMine()) {
-                rect.setTexture(&textureTileMine);
+                rect.setTexture(&textures.tileMine);
             } else {
-                rect.setTexture(&textureTileUnknown);
+                rect.setTexture(&textures.tileUnknown);
             }
             rect.setTextureRect(sf::IntRect(
                     0, 0, 16.f, 16.f)
