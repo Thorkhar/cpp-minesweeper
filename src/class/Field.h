@@ -28,7 +28,7 @@ public:
 
     void flagTile(int x, int y);
 
-    void terminateField();
+    void resetField();
 
     std::vector<Tile> getMinefield();
 };

@@ -79,7 +79,7 @@ void Field::probeTile(int x, int y) {
     int tileIndex = m_calcTileIndex(x, y);
     m_minefield[tileIndex].probe();
     if (m_minefield[tileIndex].getIsMine()) {
-        terminateField();
+        m_isAlive = false;
     }
 }
 
@@ -88,9 +88,11 @@ void Field::flagTile(int x, int y) {
     m_minefield[tileIndex].flag();
 }
 
-void Field::terminateField() {
-    std::cout << "Boom" << std::endl;
-    m_isAlive = false;
+void Field::resetField() {
+    m_isAlive = true;
+    m_minefield.clear();
+    m_generateTiles();
+    m_calculateNeighbours();
 }
 
 std::vector<Tile> Field::getMinefield() {

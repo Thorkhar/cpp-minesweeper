@@ -1,3 +1,4 @@
+#include <cmath>
 #include <filesystem>
 #include <iostream>
 #include <SFML/Graphics.hpp>
@@ -15,6 +16,17 @@ int main() {
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) { window.close(); }
+
+            if (event.type == sf::Event::MouseButtonPressed && minefield.getIsAlive()) {
+                int mouseX = event.mouseButton.x;
+                int mouseY = event.mouseButton.y;
+                std::pair<int, int> tileCoords = {std::ceil(mouseX / 16), std::ceil(mouseY = mouseY / 16)};
+                minefield.probeTile(tileCoords.first, tileCoords.second);
+            }
+
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Escape) {
+                minefield.resetField();
+            }
         }
         window.clear(sf::Color::White);
 
@@ -24,8 +36,16 @@ int main() {
             rect.setPosition({tile.getX() * 16.f, tile.getY() * 16.f});
 
             if (tile.getIsMine()) {
-                rect.setTexture(&textures.tileMine);
-            } else {
+                if (minefield.getIsAlive()) {
+                    rect.setTexture(&textures.tileUnknown);
+                } else {
+                    if (tile.getIsProbed()) {
+                        rect.setTexture(&textures.tileExploded);
+                    } else {
+                        rect.setTexture(&textures.tileMine);
+                    }
+                }
+            } else if (tile.getIsProbed()) {
                 switch (tile.getMinesNear()) {
                     case 1:
                         rect.setTexture(&textures.tileOne);
@@ -54,6 +74,8 @@ int main() {
                     default:
                         rect.setTexture(&textures.tileEmpty);
                 }
+            } else {
+                rect.setTexture(&textures.tileUnknown);
             }
             rect.setTextureRect(sf::IntRect(
                     0, 0, 16.f, 16.f)
