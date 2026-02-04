@@ -6,10 +6,12 @@
 
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "Minesweeper");
+    unsigned int fieldWidth = 30;
+    unsigned int fieldHeight = 30;
+    sf::RenderWindow window(sf::VideoMode({fieldWidth * 16, fieldHeight * 16}), "Minesweeper");
     Textures textures;
     textures.load();
-    Field minefield(10, 10, 0.2);
+    Field minefield(fieldWidth, fieldHeight, 0.15);
 
     while (window.isOpen()) {
         sf::Event event;
