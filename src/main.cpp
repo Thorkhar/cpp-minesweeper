@@ -21,7 +21,11 @@ int main() {
                 int mouseX = event.mouseButton.x;
                 int mouseY = event.mouseButton.y;
                 std::pair<int, int> tileCoords = {std::ceil(mouseX / 16), std::ceil(mouseY = mouseY / 16)};
-                minefield.probeTile(tileCoords.first, tileCoords.second);
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    minefield.probeTile(tileCoords.first, tileCoords.second);
+                } else if (event.mouseButton.button == sf::Mouse::Right) {
+                    minefield.flagTile(tileCoords.first, tileCoords.second);
+                }
             }
 
             if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Escape) {
@@ -35,7 +39,9 @@ int main() {
             sf::RectangleShape rect({16.f, 16.f});
             rect.setPosition({tile.getX() * 16.f, tile.getY() * 16.f});
 
-            if (tile.getIsMine()) {
+            if (tile.getIsFlagged() && minefield.getIsAlive()) {
+                rect.setTexture(&textures.tileFlag);
+            } else if (tile.getIsMine()) {
                 if (minefield.getIsAlive()) {
                     rect.setTexture(&textures.tileUnknown);
                 } else {
