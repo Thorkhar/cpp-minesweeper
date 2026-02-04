@@ -8,10 +8,10 @@ add_executable(cpp_minesweeper src/main.cpp
         src/class/Tile.h
         src/class/Field.cpp
         src/class/Field.h
-        src/class/RandomGenerator.cpp
-        src/class/RandomGenerator.h
-        src/class/Textures.cpp
-        src/class/Textures.h
+        src/static/RandomGenerator.cpp
+        src/static/RandomGenerator.h
+        src/struct/Textures.cpp
+        src/struct/Textures.h
 )
 target_link_libraries(cpp_minesweeper
         sfml-graphics

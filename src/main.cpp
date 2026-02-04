@@ -1,8 +1,8 @@
 #include <cmath>
 #include <filesystem>
 #include <SFML/Graphics.hpp>
-#include "class/Field.h"
-#include "class/Textures.h"
+#include "./class/Field.h"
+#include "./struct/Textures.h"
 
 
 int main() {

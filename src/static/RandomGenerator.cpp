@@ -1,4 +1,4 @@
-#include "./RandomGenerator.h"
+#include "../static/RandomGenerator.h"
 #include <random>
 
 bool RandomGenerator::randomBool(float probability) {

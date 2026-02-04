@@ -1,5 +1,5 @@
-#include "./Field.h"
-#include "./RandomGenerator.h"
+#include "../class/Field.h"
+#include "../static/RandomGenerator.h"
 #include <iostream>
 #include <stdexcept>
 

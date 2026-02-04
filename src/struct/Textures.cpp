@@ -1,4 +1,4 @@
-#include "Textures.h"
+#include "../struct/Textures.h"
 
 void Textures::load() {
     tileMine.loadFromFile("../assets/TileMine.png");
