@@ -35,19 +35,36 @@ void Field::m_calculateNeighbours() {
             std::vector<std::pair<int, int> > neighbours;
             for (int dx = x - 1; dx <= x + 1; dx++) {
                 for (int dy = y - 1; dy <= y + 1; dy++) {
-                    neighbours.emplace_back(dx, dy);
+                    if (!(dx == x && dy == y)) {
+                        neighbours.emplace_back(dx, dy);
+                    }
                 }
             }
 
-            for (auto &neighbour: neighbours) {
-                int dx = neighbour.first;
-                int dy = neighbour.second;
+            for (auto &[dx, dy]: neighbours) {
                 if (dx >= 0 && dx < m_width && dy >= 0 && dy < m_height) {
                     if (m_minefield[m_calcTileIndex(dx, dy)].getIsMine()) minesNear++;
                 }
             }
 
             m_minefield[m_calcTileIndex(x, y)].setMinesNear(minesNear);
+        }
+    }
+}
+
+void Field::m_probeSpread(int origin_x, int origin_y) {
+    std::vector<std::pair<int, int> > neighbours;
+    for (int dx = origin_x - 1; dx <= origin_x + 1; dx++) {
+        for (int dy = origin_y - 1; dy <= origin_y + 1; dy++) {
+            if (!(dx == origin_x && dy == origin_y)) {
+                neighbours.emplace_back(dx, dy);
+            }
+        }
+    }
+
+    for (auto &[dx, dy]: neighbours) {
+        if (dx >= 0 && dx < m_width && dy >= 0 && dy < m_height) {
+            if (!m_minefield[m_calcTileIndex(dx, dy)].getIsProbed()) probeTile(dx, dy);
         }
     }
 }
@@ -65,21 +82,15 @@ bool Field::getIsAlive() {
     return m_isAlive;
 }
 
-void Field::printFieldToConsole() {
-    for (int y = 0; y < m_height; y++) {
-        for (int x = 0; x < m_width; x++) {
-            int tileIndex = m_calcTileIndex(x, y);
-            std::cout << "|" << m_minefield[tileIndex].getIsMine();
-        }
-        std::cout << "|" << std::endl;
-    }
-}
-
 void Field::probeTile(int x, int y) {
     int tileIndex = m_calcTileIndex(x, y);
     m_minefield[tileIndex].probe();
     if (m_minefield[tileIndex].getIsMine()) {
         m_isAlive = false;
+    }
+
+    if (m_minefield[tileIndex].getMinesNear() == 0 && !m_minefield[tileIndex].getIsMine()) {
+        m_probeSpread(x, y);
     }
 }
 

@@ -13,6 +13,8 @@ class Field {
 
     void m_calculateNeighbours();
 
+    void m_probeSpread(int origin_x, int origin_y);
+
     int m_calcTileIndex(int x, int y);
 
 public:
@@ -21,8 +23,6 @@ public:
     int getMineCount();
 
     bool getIsAlive();
-
-    void printFieldToConsole();
 
     void probeTile(int x, int y);
 
