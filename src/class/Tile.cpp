@@ -34,7 +34,7 @@ bool Tile::getIsProbed() {
     return m_isProbed;
 }
 
-bool Tile::getMinesNear() {
+int Tile::getMinesNear() {
     return m_minesNear;
 }
 

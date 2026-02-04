@@ -19,7 +19,7 @@ public:
 
     bool getIsProbed();
 
-    bool getMinesNear();
+    int getMinesNear();
 
     void setMinesNear(int nMines);
 

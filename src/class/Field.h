@@ -11,6 +11,8 @@ class Field {
 
     void m_generateTiles();
 
+    void m_calculateNeighbours();
+
     int m_calcTileIndex(int x, int y);
 
 public:

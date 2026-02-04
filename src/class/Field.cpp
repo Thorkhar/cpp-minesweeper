@@ -17,12 +17,37 @@ Field::Field(int width, int height, float density) {
     m_density = density;
     m_isAlive = true;
     m_generateTiles();
+    m_calculateNeighbours();
 }
 
 void Field::m_generateTiles() {
     for (int y = 0; y < m_height; y++) {
         for (int x = 0; x < m_height; x++) {
             m_minefield.push_back(Tile(x, y, RandomGenerator::randomBool(m_density)));
+        }
+    }
+}
+
+void Field::m_calculateNeighbours() {
+    for (int y = 0; y < m_height; y++) {
+        for (int x = 0; x < m_width; x++) {
+            int minesNear = 0;
+            std::vector<std::pair<int, int> > neighbours;
+            for (int dx = x - 1; dx <= x + 1; dx++) {
+                for (int dy = y - 1; dy <= y + 1; dy++) {
+                    neighbours.emplace_back(dx, dy);
+                }
+            }
+
+            for (auto &neighbour: neighbours) {
+                int dx = neighbour.first;
+                int dy = neighbour.second;
+                if (dx >= 0 && dx < m_width && dy >= 0 && dy < m_height) {
+                    if (m_minefield[m_calcTileIndex(dx, dy)].getIsMine()) minesNear++;
+                }
+            }
+
+            m_minefield[m_calcTileIndex(x, y)].setMinesNear(minesNear);
         }
     }
 }

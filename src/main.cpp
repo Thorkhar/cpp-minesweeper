@@ -26,7 +26,34 @@ int main() {
             if (tile.getIsMine()) {
                 rect.setTexture(&textures.tileMine);
             } else {
-                rect.setTexture(&textures.tileUnknown);
+                switch (tile.getMinesNear()) {
+                    case 1:
+                        rect.setTexture(&textures.tileOne);
+                        break;
+                    case 2:
+                        rect.setTexture(&textures.tileTwo);
+                        break;
+                    case 3:
+                        rect.setTexture(&textures.tileThree);
+                        break;
+                    case 4:
+                        rect.setTexture(&textures.tileFour);
+                        break;
+                    case 5:
+                        rect.setTexture(&textures.tileFive);
+                        break;
+                    case 6:
+                        rect.setTexture(&textures.tileSix);
+                        break;
+                    case 7:
+                        rect.setTexture(&textures.tileSeven);
+                        break;
+                    case 8:
+                        rect.setTexture(&textures.tileEight);
+                        break;
+                    default:
+                        rect.setTexture(&textures.tileEmpty);
+                }
             }
             rect.setTextureRect(sf::IntRect(
                     0, 0, 16.f, 16.f)
