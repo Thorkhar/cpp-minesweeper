@@ -8,32 +8,38 @@
 int main() {
     unsigned int fieldWidth = 30;
     unsigned int fieldHeight = 30;
-    sf::RenderWindow window(sf::VideoMode({fieldWidth * 16, fieldHeight * 16}), "Minesweeper");
+    sf::Window window(sf::VideoMode({fieldWidth * 16, fieldHeight * 16}), "Minesweeper");
     Textures textures;
     textures.load();
     Field minefield(fieldWidth, fieldHeight, 0.15);
 
     while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) { window.close(); }
+        while (const std::optional<sf::Event> event = window.pollEvent()) {
+            if (event->is<sf::Event::KeyPressed>()) {
+                window.close();
+            }
 
-            if (event.type == sf::Event::MouseButtonPressed && minefield.getIsAlive()) {
-                int mouseX = event.mouseButton.x;
-                int mouseY = event.mouseButton.y;
-                std::pair<int, int> tileCoords = {std::ceil(mouseX / 16), std::ceil(mouseY = mouseY / 16)};
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    minefield.probeTile(tileCoords.first, tileCoords.second);
-                } else if (event.mouseButton.button == sf::Mouse::Right) {
-                    minefield.flagTile(tileCoords.first, tileCoords.second);
+            if (const auto *keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                if (keyPressed->code == sf::Keyboard::Key::Escape) {
+                    minefield.resetField();
                 }
             }
 
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Escape) {
-                minefield.resetField();
+            if (const auto *mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>()) {
+                std::pair<int, int> clickCoords = {
+                    std::ceil(mouseButtonPressed->position.x / 16),
+                    std::ceil(mouseButtonPressed->position.y / 16)
+                };
+
+                if (mouseButtonPressed->button == sf::Mouse::Button::Left) {
+                    minefield.probeTile(clickCoords.first, clickCoords.second);
+                }
+
+                if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
+                    minefield.flagTile(clickCoords.first, clickCoords.second);
+                }
             }
         }
-        window.clear(sf::Color::White);
 
         for (int i = 0; i < minefield.getMinefield().size(); i++) {
             Tile tile(minefield.getMinefield()[i]);
@@ -85,7 +91,7 @@ int main() {
                 rect.setTexture(&textures.tileUnknown);
             }
             rect.setTextureRect(sf::IntRect(
-                    0, 0, 16.f, 16.f)
+                    {0, 0}, {16, 16})
             );
             window.draw(rect);
         }
