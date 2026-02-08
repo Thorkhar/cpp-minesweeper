@@ -8,7 +8,7 @@
 int main() {
     unsigned int fieldWidth = 30;
     unsigned int fieldHeight = 30;
-    sf::Window window(sf::VideoMode({fieldWidth * 16, fieldHeight * 16}), "Minesweeper");
+    sf::RenderWindow window(sf::VideoMode({fieldWidth * 16, fieldHeight * 16}), "Minesweeper");
     Textures textures;
     textures.load();
     Field minefield(fieldWidth, fieldHeight, 0.15);

@@ -3,6 +3,8 @@ project(cpp_minesweeper)
 
 set(CMAKE_CXX_STANDARD 23)
 
+find_package(SFML COMPONENTS Network Graphics Window Audio System CONFIG REQUIRED)
+
 add_executable(cpp_minesweeper src/main.cpp
         src/class/Tile.cpp
         src/class/Tile.h
@@ -13,8 +15,4 @@ add_executable(cpp_minesweeper src/main.cpp
         src/struct/Textures.cpp
         src/struct/Textures.h
 )
-target_link_libraries(cpp_minesweeper
-        sfml-graphics
-        sfml-window
-        sfml-system
-)
+target_link_libraries(cpp_minesweeper PRIVATE SFML::Network SFML::Graphics SFML::Window SFML::Audio SFML::System)
