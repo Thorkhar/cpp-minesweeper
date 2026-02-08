@@ -15,7 +15,7 @@ int main() {
 
     while (window.isOpen()) {
         while (const std::optional<sf::Event> event = window.pollEvent()) {
-            if (event->is<sf::Event::KeyPressed>()) {
+            if (event->is<sf::Event::Closed>()) {
                 window.close();
             }
 
@@ -26,17 +26,19 @@ int main() {
             }
 
             if (const auto *mouseButtonPressed = event->getIf<sf::Event::MouseButtonPressed>()) {
-                std::pair<int, int> clickCoords = {
-                    std::ceil(mouseButtonPressed->position.x / 16),
-                    std::ceil(mouseButtonPressed->position.y / 16)
-                };
+                if (minefield.getIsAlive()) {
+                    std::pair<int, int> clickCoords = {
+                        std::ceil(mouseButtonPressed->position.x / 16),
+                        std::ceil(mouseButtonPressed->position.y / 16)
+                    };
 
-                if (mouseButtonPressed->button == sf::Mouse::Button::Left) {
-                    minefield.probeTile(clickCoords.first, clickCoords.second);
-                }
+                    if (mouseButtonPressed->button == sf::Mouse::Button::Left) {
+                        minefield.probeTile(clickCoords.first, clickCoords.second);
+                    }
 
-                if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
-                    minefield.flagTile(clickCoords.first, clickCoords.second);
+                    if (mouseButtonPressed->button == sf::Mouse::Button::Right) {
+                        minefield.flagTile(clickCoords.first, clickCoords.second);
+                    }
                 }
             }
         }
